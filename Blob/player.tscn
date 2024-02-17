@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://w7lcprkdomre"]
+
+[ext_resource type="Script" path="res://Blob/player.gd" id="1_pkds1"]
+[ext_resource type="Texture2D" uid="uid://d22f2a0iut61k" path="res://Blob/Assets/New_Player1_up.png" id="2_ilvdi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s7hnc"]
+radius = 19.0
+height = 56.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mae4m"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_pkds1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ilvdi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_s7hnc")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mae4m")
